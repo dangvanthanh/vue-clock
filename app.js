@@ -1,3 +1,11 @@
+function getHourTime(h) {
+  return h >= 12 ? 'PM' : 'AM';
+}
+
+function getZeroPad(n) {
+  return (parseInt(n, 10) >= 10 ? '' : '0') + n;
+}
+
 var Clock = { template: "<div class=clock><div class=clock__hours><span class=clock__hourtime>{{hourtime}}</span> {{hours}}</div><div class=clock__minutes>{{minutes}}</div></div>",
   data: function data() {
     return {
@@ -16,17 +24,11 @@ var Clock = { template: "<div class=clock><div class=clock__hours><span class=cl
       var now = new Date();
 
       self.hours = now.getHours();
-      self.minutes = self.getZeroPad(now.getMinutes());
-      self.hourtime = self.getHourTime(self.hours);
+      self.minutes = getZeroPad(now.getMinutes());
+      self.hourtime = getHourTime(self.hours);
       self.hours = self.hours % 12 || 12;
 
       setTimeout(self.updateDateTime, 1000);
-    },
-    getHourTime: function getHourTime(h) {
-      return h >= 12 ? 'PM' : 'AM';
-    },
-    getZeroPad: function getZeroPad(n) {
-      return (parseInt(n, 10) >= 10 ? '' : '0') + n;
     }
   }
 };

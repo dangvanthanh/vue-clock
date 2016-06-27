@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { getHourTime, getZeroPad } from '../utils/helpers.js'
+
 export default {
   data () {
     return {
@@ -26,17 +28,11 @@ export default {
       let now = new Date()
 
       self.hours = now.getHours()
-      self.minutes = self.getZeroPad(now.getMinutes())
-      self.hourtime = self.getHourTime(self.hours)
+      self.minutes = getZeroPad(now.getMinutes())
+      self.hourtime = getHourTime(self.hours)
       self.hours = self.hours % 12 || 12
 
       setTimeout(self.updateDateTime, 1000)
-    },
-    getHourTime (h) {
-      return h >= 12 ? 'PM' : 'AM'
-    },
-    getZeroPad (n) {
-      return (parseInt(n, 10) >= 10 ? '' : '0') + n
     }
   }
 }
