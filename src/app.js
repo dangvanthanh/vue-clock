@@ -1,7 +1,8 @@
+import Vue from 'vue/dist/vue'
 import Clock from './components/Clock.vue'
 
 const app = new Vue({
-  el: 'body',
+  el: '#app',
   components: {
     Clock
   }

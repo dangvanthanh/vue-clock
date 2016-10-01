@@ -1,14 +1,27 @@
-import babel from 'rollup-plugin-babel'
 import vue from 'rollup-plugin-vue'
+import buble from 'rollup-plugin-buble'
+import resolve from 'rollup-plugin-node-resolve'
+import commonjs from 'rollup-plugin-commonjs'
+import nodeGlobals from 'rollup-plugin-node-globals'
+import uglify from 'rollup-plugin-uglify'
 
 export default {
   entry: './src/app.js',
-  dest: './app.js',
+  dest: './public/app.js',
   plugins: [
-    babel({
-      exclude: './src/components/**',
-      presets: 'es2015-rollup'
+    vue({
+      css: './public/app.css'
     }),
-    vue()
+    buble({
+      objectAssign: 'Object.assign'
+    }),
+    resolve({
+      jsnext: true,
+      main: true,
+      browser: true
+    }),
+    commonjs(),
+    nodeGlobals(),
+    (process.env.NODE_ENV === 'production' && uglify())
   ]
 }
