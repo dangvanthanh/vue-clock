@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue'
+import Vue from 'vue'
 import Clock from './components/Clock.vue'
 
 const app = new Vue({
