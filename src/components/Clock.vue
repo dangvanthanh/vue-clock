@@ -5,6 +5,7 @@
       {{hours}}
     </div>
     <div class="clock__minutes">{{minutes}}</div>
+    <div class="clock__seconds">{{seconds}}</div>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ export default {
     return {
       hours: '',
       minutes: '',
+      seconds: '',
       hourtime: ''
     }
   },
@@ -29,6 +31,7 @@ export default {
 
       self.hours = now.getHours()
       self.minutes = getZeroPad(now.getMinutes())
+      self.seconds = getZeroPad(now.getSeconds())
       self.hourtime = getHourTime(self.hours)
       self.hours = self.hours % 12 || 12
 
@@ -65,10 +68,12 @@ body {
   border: .3rem solid #fff;
   border-radius: .5rem;
   display: inline-block;
+  margin-bottom: 1em;
 }
 
 .clock__hours,
-.clock__minutes {
+.clock__minutes,
+.clock__seconds {
   background: linear-gradient(to bottom, #26303b 50%, #2c3540 50%);
   display: inline-block;
   color: #fff;
@@ -86,6 +91,10 @@ body {
 }
 
 .clock__minutes {
+  border-right: .15rem solid #fff;
+}
+
+.clock__seconds {
   border-radius: 0 .5rem .5rem 0;
 }
 

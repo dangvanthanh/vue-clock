@@ -7421,11 +7421,12 @@ function getZeroPad (n) {
   return (parseInt(n, 10) >= 10 ? '' : '0') + n
 }
 
-var Clock = {render: function(){with(this){return _h('div',{staticClass:"clock"},[_h('div',{staticClass:"clock__hours"},[_h('span',{staticClass:"clock__hourtime"},[_s(hourtime)])," "+_s(hours)]),_h('div',{staticClass:"clock__minutes"},[_s(minutes)])])}},staticRenderFns: [],
+var Clock = {render: function(){with(this){return _h('div',{staticClass:"clock"},[_h('div',{staticClass:"clock__hours"},[_h('span',{staticClass:"clock__hourtime"},[_s(hourtime)])," "+_s(hours)]),_h('div',{staticClass:"clock__minutes"},[_s(minutes)]),_h('div',{staticClass:"clock__seconds"},[_s(seconds)])])}},staticRenderFns: [],
   data: function data () {
     return {
       hours: '',
       minutes: '',
+      seconds: '',
       hourtime: ''
     }
   },
@@ -7439,6 +7440,7 @@ var Clock = {render: function(){with(this){return _h('div',{staticClass:"clock"}
 
       self.hours = now.getHours()
       self.minutes = getZeroPad(now.getMinutes())
+      self.seconds = getZeroPad(now.getSeconds())
       self.hourtime = getHourTime(self.hours)
       self.hours = self.hours % 12 || 12
 
