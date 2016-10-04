@@ -7431,20 +7431,17 @@ var Clock = {render: function(){with(this){return _h('div',{staticClass:"clock"}
     }
   },
   mounted: function mounted () {
-    this.updateDateTime()
+    setInterval(this.updateDateTime, 1000)
   },
   methods: {
     updateDateTime: function updateDateTime () {
-      var self = this
       var now = new Date()
 
-      self.hours = now.getHours()
-      self.minutes = getZeroPad(now.getMinutes())
-      self.seconds = getZeroPad(now.getSeconds())
-      self.hourtime = getHourTime(self.hours)
-      self.hours = self.hours % 12 || 12
-
-      setTimeout(self.updateDateTime, 1000)
+      this.hours = now.getHours()
+      this.minutes = getZeroPad(now.getMinutes())
+      this.seconds = getZeroPad(now.getSeconds())
+      this.hourtime = getHourTime(this.hours)
+      this.hours = this.hours % 12 || 12
     }
   }
 }

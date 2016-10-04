@@ -22,20 +22,17 @@ export default {
     }
   },
   mounted () {
-    this.updateDateTime()
+    setInterval(this.updateDateTime, 1000)
   },
   methods: {
     updateDateTime () {
-      let self = this
       let now = new Date()
 
-      self.hours = now.getHours()
-      self.minutes = getZeroPad(now.getMinutes())
-      self.seconds = getZeroPad(now.getSeconds())
-      self.hourtime = getHourTime(self.hours)
-      self.hours = self.hours % 12 || 12
-
-      setTimeout(self.updateDateTime, 1000)
+      this.hours = now.getHours()
+      this.minutes = getZeroPad(now.getMinutes())
+      this.seconds = getZeroPad(now.getSeconds())
+      this.hourtime = getHourTime(this.hours)
+      this.hours = this.hours % 12 || 12
     }
   }
 }
