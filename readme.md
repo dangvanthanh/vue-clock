@@ -1,19 +1,20 @@
-# Vue Clock
+# vue-clock
 
-> Simple clock component using vue.js
+> Simple clock component using Vue.js
 
-![](screenshot.png)
+## Build setup
 
-## Build
-
-```
+``` bash
 # Install dependencies
 npm install
 
-# Serve with hot reload at localhost:8080
+# Server with hot reload at localhost:8080
 npm run dev
+
+# Build for production with minification
+npm run build
 ```
 
 ## License
 
-MIT © [Dang Van Thanh](http://dangthanh.org)
+MIT © Dang Van Thanh <dangvanthanh@dangthanh.org>
