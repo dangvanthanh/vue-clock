@@ -1,11 +1,11 @@
 <template>
   <div class="clock">
     <div class="clock__hours">
-      <span class="clock__hourtime">{{hourtime}}</span>
-      {{hours}}
+      <span class="clock__hourtime" v-text="hourtime"></span>
+      <span v-text="hours"></span>
     </div>
-    <div class="clock__minutes">{{minutes}}</div>
-    <div class="clock__seconds">{{seconds}}</div>
+    <div class="clock__minutes" v-text="minutes"></div>
+    <div class="clock__seconds" v-text="seconds"></div>
   </div>
 </template>
 

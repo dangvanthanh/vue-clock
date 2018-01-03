@@ -31,9 +31,9 @@ let config = {
   input: './src/main.js',
   output: {
     file: './dist/assets/js/app.js',
-    format: 'umd'
+    format: 'umd',
+    sourcemap: true
   },
-  sourcemap: true,
   plugins: plugins
 }
 
@@ -47,11 +47,13 @@ if (isProduction) {
 
 if (isDevelopment) {
   config.plugins.push(livereload())
-  config.plugins.push(serve({
-    contentBase: './dist/',
-    port: 8080,
-    open: true
-  }))
+  config.plugins.push(
+    serve({
+      contentBase: './dist/',
+      port: 8080,
+      open: true
+    })
+  )
 }
 
 export default config
