@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { getHourTime, getZeroPad } from '../filters'
+import { getHourTime, getZeroPad } from './Filters'
 
 export default {
   data () {
