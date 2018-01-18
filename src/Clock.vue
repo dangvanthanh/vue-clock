@@ -39,27 +39,6 @@ export default {
 </script>
 
 <style>
-*,
-*:before,
-*:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #dd4a38;
-  margin: 0;
-  color: #444;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.container {
-  max-width: 25rem;
-  margin: 50px auto;
-}
-
 .clock {
   background: #fff;
   border: .3rem solid #fff;
