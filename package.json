@@ -3,11 +3,24 @@
   "version": "0.1.0",
   "description": "Simple clock using Vue.js",
   "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
-  "main": "src/index.js",
+  "main": "dist/vue-clock.cjs.js",
+  "module": "dist/vue-clock.es.js",
+  "unpkg": "dist/vue-clock.js",
+  "scripts": {
+    "build": "bili src/index.js --plugin vue --format umd,cjs,es --exports named --module-name VueClock",
+    "example": "poi example/index.js",
+    "public": "poi build example/index.js --out-dir public"
+  },
   "keywords": [
     "vue",
     "vue-clock",
     "clock"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "bili": "^3.1.2",
+    "poi": "^10.2.1",
+    "rollup-plugin-vue": "^4.2.0",
+    "vue-template-compiler": "^2.5.16"
+  }
 }

@@ -1,3 +1,3 @@
-import Clock from './Clock.vue'
+import VueClock from './VueClock.vue';
 
-export default Clock
+export default VueClock;
