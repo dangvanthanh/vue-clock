@@ -1,5 +1,5 @@
 <template>
-  <div class="clock">
+  <div class="clock" v-if="hourtime != ''">
     <div class="clock__hours">
       <span class="clock__hourtime" v-text="hourtime"></span>
       <span v-text="hours"></span>
@@ -15,14 +15,17 @@ import { getHourTime, getZeroPad } from './Filters'
 export default {
   data () {
     return {
-      hours: '',
-      minutes: '',
-      seconds: '',
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
       hourtime: ''
     }
   },
   mounted () {
-    setInterval(this.updateDateTime, 1000)
+    this.$options.interval = setInterval(this.updateDateTime, 1000);
+  },
+  beforeDestroy () {
+    clearInterval(this.$options.interval);
   },
   methods: {
     updateDateTime () {

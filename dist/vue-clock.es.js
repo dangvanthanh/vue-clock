@@ -9,14 +9,17 @@ function getZeroPad(n) {
 var script = {
   data: function data() {
     return {
-      hours: '',
-      minutes: '',
-      seconds: '',
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
       hourtime: ''
     };
   },
   mounted: function mounted() {
-    setInterval(this.updateDateTime, 1000);
+    this.$options.interval = setInterval(this.updateDateTime, 1000);
+  },
+  beforeDestroy: function beforeDestroy() {
+    clearInterval(this.$options.interval);
   },
   methods: {
     updateDateTime: function updateDateTime() {
@@ -41,7 +44,7 @@ var __vue_render__ = function __vue_render__() {
 
   var _c = _vm._self._c || _h;
 
-  return _c("div", {
+  return _vm.hourtime != "" ? _c("div", {
     staticClass: "clock"
   }, [_c("div", {
     staticClass: "clock__hours"
@@ -64,7 +67,7 @@ var __vue_render__ = function __vue_render__() {
     domProps: {
       textContent: _vm._s(_vm.seconds)
     }
-  })]);
+  })]) : _vm._e();
 };
 
 var __vue_staticRenderFns__ = [];
@@ -79,7 +82,7 @@ var __vue_template__ = typeof __vue_render__ !== 'undefined' ? {
 
 var __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-3b693988_0", {
+  inject("data-v-43325e28_0", {
     source: "\n.clock {\n  background: #fff;\n  border: .3rem solid #fff;\n  border-radius: .5rem;\n  display: inline-block;\n  margin-bottom: 1em;\n}\n.clock__hours,\n.clock__minutes,\n.clock__seconds {\n  background: linear-gradient(to bottom, #26303b 50%, #2c3540 50%);\n  display: inline-block;\n  color: #fff;\n  font-family: 'Nunito', sans-serif;\n  font-size: 3rem;\n  font-weight: 300;\n  padding: .5rem 1rem;\n  text-align: center;\n  position: relative;\n}\n.clock__hours {\n  border-right: .15rem solid #fff;\n  border-radius: .5rem 0 0 .5rem;\n}\n.clock__minutes {\n  border-right: .15rem solid #fff;\n}\n.clock__seconds {\n  border-radius: 0 .5rem .5rem 0;\n}\n.clock__hourtime {\n  font-size: 1rem;\n  position: absolute;\n  top: 2px;\n  left: 8px;\n}\n",
     map: undefined,
     media: undefined
