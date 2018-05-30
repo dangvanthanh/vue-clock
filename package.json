@@ -22,5 +22,17 @@
     "poi": "^10.2.1",
     "rollup-plugin-vue": "^4.2.0",
     "vue-template-compiler": "^2.5.16"
-  }
+  },
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dangvanthanh/vue-clock.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dangvanthanh/vue-clock/issues"
+  },
+  "homepage": "https://github.com/dangvanthanh/vue-clock#readme"
 }
