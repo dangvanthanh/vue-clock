@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .clock {
   background: #fff;
   border: .3rem solid #fff;
