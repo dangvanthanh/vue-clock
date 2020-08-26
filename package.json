@@ -1,26 +1,23 @@
 {
   "name": "@dangvanthanh/vue-clock",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple clock using Vue.js",
   "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
   "main": "dist/vue-clock.cjs.js",
-  "module": "dist/vue-clock.es.js",
-  "unpkg": "dist/vue-clock.js",
+  "module": "dist/vue-clock.esm.js",
+  "browser": "dist/vue-clock.js",
   "scripts": {
-    "build": "bili src/index.js --plugin vue --format umd,cjs,es --exports named --module-name VueClock"
+    "build": "rollup -c"
   },
-  "keywords": [
-    "vue",
-    "vue-clock",
-    "clock"
-  ],
+  "keywords": ["vue", "vue-clock", "clock"],
   "license": "MIT",
   "devDependencies": {
-    "bili": "3.4.2",
-    "rollup-plugin-vue": "4.3.2",
-    "vue-template-compiler": "2.5.21"
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "rollup": "^2.26.5",
+    "rollup-plugin-vue": "^5.1.9",
+    "vue-template-compiler": "^2.6.12"
   },
-  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dangvanthanh/vue-clock.git"

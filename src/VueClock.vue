@@ -10,42 +10,42 @@
 </template>
 
 <script>
-import { getHourTime, getZeroPad } from './Filters'
+import { SECOND, HOUR, getHourTime, getZeroPad } from './Filters';
 
 export default {
-  data () {
+  data() {
     return {
       hours: 0,
       minutes: 0,
       seconds: 0,
-      hourtime: ''
-    }
+      hourtime: '',
+    };
   },
-  mounted () {
-    this.$options.interval = setInterval(this.updateDateTime, 1000);
+  mounted() {
+    this.$options.timer = window.setTimeout(this.updateDateTime, SECOND);
   },
-  beforeDestroy () {
-    clearInterval(this.$options.interval);
+  beforeDestroy() {
+    window.clearTimeout(this.$options.timer);
   },
   methods: {
-    updateDateTime () {
-      let now = new Date()
-
-      this.hours = now.getHours()
-      this.minutes = getZeroPad(now.getMinutes())
-      this.seconds = getZeroPad(now.getSeconds())
-      this.hourtime = getHourTime(this.hours)
-      this.hours = this.hours % 12 || 12
-    }
-  }
-}
+    updateDateTime() {
+      const now = new Date();
+      this.hours = now.getHours();
+      this.minutes = getZeroPad(now.getMinutes());
+      this.seconds = getZeroPad(now.getSeconds());
+      this.hourtime = getHourTime(this.hours);
+      this.hours = this.hours % HOUR || HOUR;
+      this.$options.timer = window.setTimeout(this.updateDateTime, SECOND);
+    },
+  },
+};
 </script>
 
 <style scoped>
 .clock {
   background: #fff;
-  border: .3rem solid #fff;
-  border-radius: .5rem;
+  border: 0.3rem solid #fff;
+  border-radius: 0.5rem;
   display: inline-block;
   margin-bottom: 1em;
 }
@@ -59,22 +59,22 @@ export default {
   font-family: 'Nunito', sans-serif;
   font-size: 3rem;
   font-weight: 300;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   text-align: center;
   position: relative;
 }
 
 .clock__hours {
-  border-right: .15rem solid #fff;
-  border-radius: .5rem 0 0 .5rem;
+  border-right: 0.15rem solid #fff;
+  border-radius: 0.5rem 0 0 0.5rem;
 }
 
 .clock__minutes {
-  border-right: .15rem solid #fff;
+  border-right: 0.15rem solid #fff;
 }
 
 .clock__seconds {
-  border-radius: 0 .5rem .5rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
 .clock__hourtime {

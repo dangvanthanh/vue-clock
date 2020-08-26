@@ -1,5 +1,3 @@
-'use strict';
-
 const SECOND = 1000;
 const HOUR = 12;
 
@@ -116,56 +114,57 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
     return script;
 }
 
-function createInjectorSSR(context) {
-    if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__;
-    }
-    if (!context)
-        return () => { };
-    if (!('styles' in context)) {
-        context._styles = context._styles || {};
-        Object.defineProperty(context, 'styles', {
-            enumerable: true,
-            get: () => context._renderStyles(context._styles)
-        });
-        context._renderStyles = context._renderStyles || renderStyles;
-    }
-    return (id, style) => addStyle(id, style, context);
+const isOldIE = typeof navigator !== 'undefined' &&
+    /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+function createInjector(context) {
+    return (id, style) => addStyle(id, style);
 }
-function addStyle(id, css, context) {
-    const group = process.env.NODE_ENV === 'production' ? css.media || 'default' : id;
-    const style = context._styles[group] || (context._styles[group] = { ids: [], css: '' });
-    if (!style.ids.includes(id)) {
-        style.media = css.media;
-        style.ids.push(id);
+let HEAD;
+const styles = {};
+function addStyle(id, css) {
+    const group = isOldIE ? css.media || 'default' : id;
+    const style = styles[group] || (styles[group] = { ids: new Set(), styles: [] });
+    if (!style.ids.has(id)) {
+        style.ids.add(id);
         let code = css.source;
-        if (process.env.NODE_ENV !== 'production' && css.map) {
+        if (css.map) {
             // https://developer.chrome.com/devtools/docs/javascript-debugging
             // this makes source maps inside style tags work properly in Chrome
             code += '\n/*# sourceURL=' + css.map.sources[0] + ' */';
             // http://stackoverflow.com/a/26603875
             code +=
                 '\n/*# sourceMappingURL=data:application/json;base64,' +
-                    Buffer.from(unescape(encodeURIComponent(JSON.stringify(css.map)))).toString('base64') +
+                    btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) +
                     ' */';
         }
-        style.css += code + '\n';
+        if (!style.element) {
+            style.element = document.createElement('style');
+            style.element.type = 'text/css';
+            if (css.media)
+                style.element.setAttribute('media', css.media);
+            if (HEAD === undefined) {
+                HEAD = document.head || document.getElementsByTagName('head')[0];
+            }
+            HEAD.appendChild(style.element);
+        }
+        if ('styleSheet' in style.element) {
+            style.styles.push(code);
+            style.element.styleSheet.cssText = style.styles
+                .filter(Boolean)
+                .join('\n');
+        }
+        else {
+            const index = style.ids.size - 1;
+            const textNode = document.createTextNode(code);
+            const nodes = style.element.childNodes;
+            if (nodes[index])
+                style.element.removeChild(nodes[index]);
+            if (nodes.length)
+                style.element.insertBefore(textNode, nodes[index]);
+            else
+                style.element.appendChild(textNode);
+        }
     }
-}
-function renderStyles(styles) {
-    let css = '';
-    for (const key in styles) {
-        const style = styles[key];
-        css +=
-            '<style data-vue-ssr-id="' +
-                Array.from(style.ids).join(' ') +
-                '"' +
-                (style.media ? ' media="' + style.media + '"' : '') +
-                '>' +
-                style.css +
-                '</style>';
-    }
-    return css;
 }
 
 /* script */
@@ -178,17 +177,24 @@ var __vue_render__ = function() {
   var _c = _vm._self._c || _h;
   return _vm.hourtime != ""
     ? _c("div", { staticClass: "clock" }, [
-        _vm._ssrNode(
-          '<div class="clock__hours" data-v-6294754c><span class="clock__hourtime" data-v-6294754c>' +
-            _vm._ssrEscape(_vm._s(_vm.hourtime)) +
-            "</span> <span data-v-6294754c>" +
-            _vm._ssrEscape(_vm._s(_vm.hours)) +
-            '</span></div> <div class="clock__minutes" data-v-6294754c>' +
-            _vm._ssrEscape(_vm._s(_vm.minutes)) +
-            '</div> <div class="clock__seconds" data-v-6294754c>' +
-            _vm._ssrEscape(_vm._s(_vm.seconds)) +
-            "</div>"
-        )
+        _c("div", { staticClass: "clock__hours" }, [
+          _c("span", {
+            staticClass: "clock__hourtime",
+            domProps: { textContent: _vm._s(_vm.hourtime) }
+          }),
+          _vm._v(" "),
+          _c("span", { domProps: { textContent: _vm._s(_vm.hours) } })
+        ]),
+        _vm._v(" "),
+        _c("div", {
+          staticClass: "clock__minutes",
+          domProps: { textContent: _vm._s(_vm.minutes) }
+        }),
+        _vm._v(" "),
+        _c("div", {
+          staticClass: "clock__seconds",
+          domProps: { textContent: _vm._s(_vm.seconds) }
+        })
       ])
     : _vm._e()
 };
@@ -204,9 +210,11 @@ __vue_render__._withStripped = true;
   /* scoped */
   const __vue_scope_id__ = "data-v-6294754c";
   /* module identifier */
-  const __vue_module_identifier__ = "data-v-6294754c";
+  const __vue_module_identifier__ = undefined;
   /* functional template */
   const __vue_is_functional_template__ = false;
+  /* style inject SSR */
+  
   /* style inject shadow dom */
   
 
@@ -219,9 +227,9 @@ __vue_render__._withStripped = true;
     __vue_is_functional_template__,
     __vue_module_identifier__,
     false,
+    createInjector,
     undefined,
-    createInjectorSSR,
     undefined
   );
 
-module.exports = __vue_component__;
+export default __vue_component__;
