@@ -1,5 +1,8 @@
-var VueClock = (function () {
-  'use strict';
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.VueClock = factory());
+}(this, (function () { 'use strict';
 
   const SECOND = 1000;
   const HOUR = 12;
@@ -237,4 +240,4 @@ var VueClock = (function () {
 
   return __vue_component__;
 
-}());
+})));

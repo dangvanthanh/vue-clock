@@ -14,6 +14,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
+      exports: 'default',
       format: 'cjs',
       file: 'dist/vue-clock.cjs.js',
     },
@@ -23,8 +24,8 @@ export default [
     input: 'src/index.js',
     output: {
       name: 'VueClock',
-      format: 'iife',
-      file: 'dist/vue-clock.js',
+      format: 'umd',
+      file: 'dist/vue-clock.umd.js',
     },
     plugins: [vue(), resolve(), commonjs()],
   },

@@ -1,11 +1,11 @@
 {
   "name": "@dangvanthanh/vue-clock",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Simple clock using Vue.js",
   "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
   "main": "dist/vue-clock.cjs.js",
   "module": "dist/vue-clock.esm.js",
-  "browser": "dist/vue-clock.js",
+  "browser": "dist/vue-clock.umd.js",
   "scripts": {
     "build": "rollup -c"
   },
