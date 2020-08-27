@@ -2,6 +2,7 @@ import vue from 'rollup-plugin-vue';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import esbuild from 'rollup-plugin-esbuild';
+import pkg from './package.json';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -12,18 +13,18 @@ export default [
     input: 'src/index.js',
     output: {
       format: 'esm',
-      file: 'dist/vue-clock.esm.js',
+      file: pkg.main
     },
-    plugins,
+    plugins
   },
   {
     input: 'src/index.js',
     output: {
       exports: 'named',
       format: 'cjs',
-      file: 'dist/vue-clock.cjs.js',
+      file: pkg.module
     },
-    plugins,
+    plugins
   },
   {
     input: 'src/index.js',
@@ -31,8 +32,8 @@ export default [
       name: 'VueClock',
       exports: 'named',
       format: 'umd',
-      file: 'dist/vue-clock.umd.js',
+      file: pkg.browser
     },
-    plugins,
-  },
+    plugins
+  }
 ];
