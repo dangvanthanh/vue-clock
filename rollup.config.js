@@ -7,6 +7,12 @@ import pkg from './package.json';
 const production = !process.env.ROLLUP_WATCH;
 
 const plugins = [vue(), resolve(), commonjs(), esbuild({ minify: production })];
+const pluginsSSR = [
+  vue({ template: { optimizeSSR: true } }),
+  resolve(),
+  commonjs(),
+  esbuild({ minify: production })
+];
 
 export default [
   {
@@ -24,7 +30,7 @@ export default [
       format: 'cjs',
       file: pkg.module
     },
-    plugins
+    plugins: pluginsSSR
   },
   {
     input: 'src/index.js',
