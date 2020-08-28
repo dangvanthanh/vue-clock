@@ -1,0 +1,37 @@
+
+.clock[data-v-6294754c] {
+  background: #fff;
+  border: 0.3rem solid #fff;
+  border-radius: 0.5rem;
+  display: inline-block;
+  margin-bottom: 1em;
+}
+.clock__hours[data-v-6294754c],
+.clock__minutes[data-v-6294754c],
+.clock__seconds[data-v-6294754c] {
+  background: linear-gradient(to bottom, #26303b 50%, #2c3540 50%);
+  display: inline-block;
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 3rem;
+  font-weight: 300;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  position: relative;
+}
+.clock__hours[data-v-6294754c] {
+  border-right: 0.15rem solid #fff;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+.clock__minutes[data-v-6294754c] {
+  border-right: 0.15rem solid #fff;
+}
+.clock__seconds[data-v-6294754c] {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+.clock__hourtime[data-v-6294754c] {
+  font-size: 1rem;
+  position: absolute;
+  top: 2px;
+  left: 8px;
+}
