@@ -8,8 +8,8 @@
 
 ### CDN
 
-```
-<script src="https://unpkg.com/vue-clock.min.js"></script>
+```html
+<script src="hhttps://unpkg.com/@dangvanthanh/vue-clock"></script>
 ```
 
 ### NPM
