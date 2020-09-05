@@ -1,14 +1,18 @@
 {
   "name": "@dangvanthanh/vue-clock",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Simple clock using Vue.js",
   "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
-  "main": "dist/vue-clock.cjs.js",
+  "main": "dist/vue-clock.umd.js",
   "module": "dist/vue-clock.esm.js",
-  "browser": "dist/vue-clock.umd.js",
+  "unpkg": "dist/vue-clock.min.js",
   "style": "vue-clock/dist/vue-clock.esm.css",
   "scripts": {
-    "build": "rollup -c"
+    "clean": "rm -rf dist",
+    "build": "npm run clean && npm run build:browsers && npm run build:es && npm run build:umd",
+    "build:browsers": "rollup -c build/rollup.config.browsers.js",
+    "build:es": "rollup -c build/rollup.config.es.js",
+    "build:umd": "rollup -c build/rollup.config.umd.js"
   },
   "keywords": [
     "vue",
@@ -19,8 +23,9 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
+    "clean-css": "^4.2.3",
     "esbuild": "^0.6.30",
-    "rollup": "^2.26.9",
+    "rollup": "^2.26.10",
     "rollup-plugin-css-only": "^2.1.0",
     "rollup-plugin-esbuild": "^2.5.0",
     "rollup-plugin-vue": "^5.1.9",

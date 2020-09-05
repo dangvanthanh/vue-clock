@@ -4,7 +4,15 @@
 
 ![](screenshot.png)
 
-## Install 
+## Install
+
+### CDN
+
+```
+<script src="https://unpkg.com/vue-clock.min.js"></script>
+```
+
+### NPM
 
 ```shell
 $ npm install @dangvanthanh/vue-clock --save
@@ -12,7 +20,7 @@ $ npm install @dangvanthanh/vue-clock --save
 
 ## Usage
 
-### Vue 
+### Vue
 
 #### Global
 
@@ -35,7 +43,7 @@ import VueClock from '@dangvanthanh/vue-clock';
 
 export default {
   components: { VueClock }
-}
+};
 </script>
 ```
 
@@ -51,8 +59,6 @@ Vue.component('VueClock', VueClock);
 // Vue.use(VueClock);
 ```
 
-### 
-
 ## License
 
-MIT © Dang Van Thanh <dangvanthanh@dangthanh.org>
+MIT © [Dang Van Thanh](https://dangthanh.org)

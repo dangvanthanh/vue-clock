@@ -1,1 +1,196 @@
-const p=1e3,h=12;function b(e){return e>=12?"PM":"AM"}function m(e){return(parseInt(e,10)>=10?"":"0")+e}var E={data(){return{hours:0,minutes:0,seconds:0,hourtime:""}},mounted(){this.$options.timer=window.setTimeout(this.updateDateTime,p)},beforeDestroy(){window.clearTimeout(this.$options.timer)},methods:{updateDateTime(){const e=new Date();this.hours=e.getHours(),this.minutes=m(e.getMinutes()),this.seconds=m(e.getSeconds()),this.hourtime=b(this.hours),this.hours=this.hours%h||h,this.$options.timer=window.setTimeout(this.updateDateTime,p)}}};function R(e,s,o,u,C,d,r,_,l,w){typeof r!="boolean"&&(l=_,_=r,r=!1);const n=typeof o=="function"?o.options:o;e&&e.render&&(n.render=e.render,n.staticRenderFns=e.staticRenderFns,n._compiled=!0,C&&(n.functional=!0)),u&&(n._scopeId=u);let i;if(d?(i=function(t){t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,!t&&typeof __VUE_SSR_CONTEXT__!="undefined"&&(t=__VUE_SSR_CONTEXT__),s&&s.call(this,l(t)),t&&t._registeredComponents&&t._registeredComponents.add(d)},n._ssrRegister=i):s&&(i=r?function(t){s.call(this,w(t,this.$root.$options.shadowRoot))}:function(t){s.call(this,_(t))}),i)if(n.functional){const t=n.render;n.render=function(y,f){return i.call(f),t(y,f)}}else{const t=n.beforeCreate;n.beforeCreate=t?[].concat(t,i):[i]}return o}const T=E;var v=function(){var e=this,s=e.$createElement,o=e._self._c||s;return e.hourtime!=""?o("div",{staticClass:"clock"},[e._ssrNode('<div class="clock__hours" data-v-6294754c><span class="clock__hourtime" data-v-6294754c>'+e._ssrEscape(e._s(e.hourtime))+"</span> <span data-v-6294754c>"+e._ssrEscape(e._s(e.hours))+'</span></div> <div class="clock__minutes" data-v-6294754c>'+e._ssrEscape(e._s(e.minutes))+'</div> <div class="clock__seconds" data-v-6294754c>'+e._ssrEscape(e._s(e.seconds))+"</div>")]):e._e()},$=[];v._withStripped=!0;const k=void 0,S="data-v-6294754c",V="data-v-6294754c",D=!1,g=R({render:v,staticRenderFns:$},k,T,S,D,V,!1,void 0,void 0,void 0);function c(e){if(c.installed)return;c.installed=!0,e.component("VueClock",g)}const j={install:c};let a=null;typeof window!="undefined"?a=window.Vue:typeof global!="undefined"&&(a=global.Vue),a&&a.use(j);export default g;export{c as install};
+const SECOND = 1000;
+const HOUR = 12;
+
+function getHourTime (h) {
+  return h >= 12 ? 'PM' : 'AM'
+}
+
+function getZeroPad (n) {
+  return (parseInt(n, 10) >= 10 ? '' : '0') + n
+}
+
+//
+
+var script = {
+  data() {
+    return {
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      hourtime: '',
+    };
+  },
+  mounted() {
+    this.$options.timer = window.setTimeout(this.updateDateTime, SECOND);
+  },
+  beforeDestroy() {
+    window.clearTimeout(this.$options.timer);
+  },
+  methods: {
+    updateDateTime() {
+      const now = new Date();
+      this.hours = now.getHours();
+      this.minutes = getZeroPad(now.getMinutes());
+      this.seconds = getZeroPad(now.getSeconds());
+      this.hourtime = getHourTime(this.hours);
+      this.hours = this.hours % HOUR || HOUR;
+      this.$options.timer = window.setTimeout(this.updateDateTime, SECOND);
+    },
+  },
+};
+
+function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+    if (typeof shadowMode !== 'boolean') {
+        createInjectorSSR = createInjector;
+        createInjector = shadowMode;
+        shadowMode = false;
+    }
+    // Vue.extend constructor export interop.
+    const options = typeof script === 'function' ? script.options : script;
+    // render functions
+    if (template && template.render) {
+        options.render = template.render;
+        options.staticRenderFns = template.staticRenderFns;
+        options._compiled = true;
+        // functional template
+        if (isFunctionalTemplate) {
+            options.functional = true;
+        }
+    }
+    // scopedId
+    if (scopeId) {
+        options._scopeId = scopeId;
+    }
+    let hook;
+    if (moduleIdentifier) {
+        // server build
+        hook = function (context) {
+            // 2.3 injection
+            context =
+                context || // cached call
+                    (this.$vnode && this.$vnode.ssrContext) || // stateful
+                    (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext); // functional
+            // 2.2 with runInNewContext: true
+            if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                context = __VUE_SSR_CONTEXT__;
+            }
+            // inject component styles
+            if (style) {
+                style.call(this, createInjectorSSR(context));
+            }
+            // register component module identifier for async chunk inference
+            if (context && context._registeredComponents) {
+                context._registeredComponents.add(moduleIdentifier);
+            }
+        };
+        // used by ssr in case component is cached and beforeCreate
+        // never gets called
+        options._ssrRegister = hook;
+    }
+    else if (style) {
+        hook = shadowMode
+            ? function (context) {
+                style.call(this, createInjectorShadow(context, this.$root.$options.shadowRoot));
+            }
+            : function (context) {
+                style.call(this, createInjector(context));
+            };
+    }
+    if (hook) {
+        if (options.functional) {
+            // register for functional component in vue file
+            const originalRender = options.render;
+            options.render = function renderWithStyleInjection(h, context) {
+                hook.call(context);
+                return originalRender(h, context);
+            };
+        }
+        else {
+            // inject component registration as beforeCreate hook
+            const existing = options.beforeCreate;
+            options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+        }
+    }
+    return script;
+}
+
+/* script */
+const __vue_script__ = script;
+/* template */
+var __vue_render__ = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _vm.hourtime != ""
+    ? _c("div", { staticClass: "clock" }, [
+        _vm._ssrNode(
+          '<div class="clock__hours" data-v-6294754c><span class="clock__hourtime" data-v-6294754c>' +
+            _vm._ssrEscape(_vm._s(_vm.hourtime)) +
+            "</span> <span data-v-6294754c>" +
+            _vm._ssrEscape(_vm._s(_vm.hours)) +
+            '</span></div> <div class="clock__minutes" data-v-6294754c>' +
+            _vm._ssrEscape(_vm._s(_vm.minutes)) +
+            '</div> <div class="clock__seconds" data-v-6294754c>' +
+            _vm._ssrEscape(_vm._s(_vm.seconds)) +
+            "</div>"
+        )
+      ])
+    : _vm._e()
+};
+var __vue_staticRenderFns__ = [];
+__vue_render__._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = "data-v-6294754c";
+  /* module identifier */
+  const __vue_module_identifier__ = "data-v-6294754c";
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+  /* style inject shadow dom */
+  
+
+  
+  const __vue_component__ = /*#__PURE__*/normalizeComponent(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    false,
+    undefined,
+    undefined,
+    undefined
+  );
+
+// Declare install function excuted by Vue.use()
+function install(Vue) {
+  if (install.installed) {
+    return;
+  }
+  install.installed = true;
+  Vue.component('VueClock', __vue_component__);
+}
+
+const plugin = { install };
+
+let GlobalVue = null;
+
+if (typeof window !== 'undefined') {
+  GlobalVue = window.Vue;
+} else if (typeof global !== 'undefined') {
+  GlobalVue = global.Vue;
+}
+
+if (GlobalVue) {
+  GlobalVue.use(plugin);
+}
+
+export default plugin;
+export { install };
