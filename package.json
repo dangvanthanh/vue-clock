@@ -10,15 +10,19 @@
   "scripts": {
     "build": "rollup -c"
   },
-  "keywords": ["vue", "vue-clock", "clock"],
+  "keywords": [
+    "vue",
+    "vue-clock",
+    "clock"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-    "esbuild": "^0.6.28",
-    "rollup": "^2.26.6",
+    "esbuild": "^0.6.30",
+    "rollup": "^2.26.9",
     "rollup-plugin-css-only": "^2.1.0",
-    "rollup-plugin-esbuild": "^2.4.2",
+    "rollup-plugin-esbuild": "^2.5.0",
     "rollup-plugin-vue": "^5.1.9",
     "vue-template-compiler": "^2.6.12"
   },

@@ -11,16 +11,16 @@ export function install(Vue) {
 
 const plugin = { install };
 
-let globalVue = null;
+let GlobalVue = null;
 
 if (typeof window !== 'undefined') {
-  globalVue = window.Vue;
+  GlobalVue = window.Vue;
 } else if (typeof global !== 'undefined') {
-  globalVue = global.Vue;
+  GlobalVue = global.Vue;
 }
 
-if (globalVue) {
-  globalVue.use(plugin);
+if (GlobalVue) {
+  GlobalVue.use(plugin);
 }
 
-export default VueClock;
+export default plugin;
