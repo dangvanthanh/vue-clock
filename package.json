@@ -8,8 +8,7 @@
   "unpkg": "dist/vue-clock.min.js",
   "style": "vue-clock/dist/vue-clock.esm.css",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "npm run clean && npm run build:browsers && npm run build:es && npm run build:umd",
+    "build": "npm run build:browsers && npm run build:es && npm run build:umd",
     "build:browsers": "rollup -c build/rollup.config.browsers.js",
     "build:es": "rollup -c build/rollup.config.es.js",
     "build:umd": "rollup -c build/rollup.config.umd.js"
