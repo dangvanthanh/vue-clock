@@ -9,7 +9,7 @@
 ### CDN
 
 ```html
-<script src="hhttps://unpkg.com/@dangvanthanh/vue-clock"></script>
+<script src="https://unpkg.com/@dangvanthanh/vue-clock"></script>
 ```
 
 ### NPM
