@@ -11,8 +11,6 @@ export function install(Vue) {
 
 const plugin = { install };
 
-export default plugin;
-
 let GlobalVue = null;
 
 if (typeof window !== 'undefined') {
@@ -24,3 +22,5 @@ if (typeof window !== 'undefined') {
 if (GlobalVue) {
   GlobalVue.use(plugin);
 }
+
+export default plugin;
