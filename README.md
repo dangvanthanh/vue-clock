@@ -1,4 +1,4 @@
-# vue-clock
+# vue-Clock
 
 > Simple clock component using Vue.js
 
