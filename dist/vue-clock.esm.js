@@ -124,13 +124,13 @@ var __vue_render__ = function() {
   return _vm.hourtime != ""
     ? _c("div", { staticClass: "clock" }, [
         _vm._ssrNode(
-          '<div class="clock__hours" data-v-6294754c><span class="clock__hourtime" data-v-6294754c>' +
+          '<div class="clock__hours" data-v-91068ba8><span class="clock__hourtime" data-v-91068ba8>' +
             _vm._ssrEscape(_vm._s(_vm.hourtime)) +
-            "</span> <span data-v-6294754c>" +
+            "</span> <span data-v-91068ba8>" +
             _vm._ssrEscape(_vm._s(_vm.hours)) +
-            '</span></div> <div class="clock__minutes" data-v-6294754c>' +
+            '</span></div> <div class="clock__minutes" data-v-91068ba8>' +
             _vm._ssrEscape(_vm._s(_vm.minutes)) +
-            '</div> <div class="clock__seconds" data-v-6294754c>' +
+            '</div> <div class="clock__seconds" data-v-91068ba8>' +
             _vm._ssrEscape(_vm._s(_vm.seconds)) +
             "</div>"
         )
@@ -143,9 +143,9 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = undefined;
   /* scoped */
-  const __vue_scope_id__ = "data-v-6294754c";
+  const __vue_scope_id__ = "data-v-91068ba8";
   /* module identifier */
-  const __vue_module_identifier__ = "data-v-6294754c";
+  const __vue_module_identifier__ = "data-v-91068ba8";
   /* functional template */
   const __vue_is_functional_template__ = false;
   /* style inject */

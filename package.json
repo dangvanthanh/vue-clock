@@ -1,6 +1,6 @@
 {
   "name": "@dangvanthanh/vue-clock",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Simple clock using Vue.js",
   "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
   "main": "dist/vue-clock.umd.js",
@@ -11,22 +11,20 @@
     "build": "npm run build:browsers && npm run build:es && npm run build:umd",
     "build:browsers": "rollup -c build/rollup.config.browsers.js",
     "build:es": "rollup -c build/rollup.config.es.js",
-    "build:umd": "rollup -c build/rollup.config.umd.js"
+    "build:umd": "rollup -c build/rollup.config.umd.js",
+    "release": "rimraf dist && npm run build && npx clean-publish"
   },
-  "keywords": [
-    "vue",
-    "vue-clock",
-    "clock"
-  ],
+  "keywords": ["vue", "vue-clock", "clock"],
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^15.0.0",
-    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-commonjs": "^16.0.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
     "clean-css": "^4.2.3",
-    "esbuild": "^0.6.30",
-    "rollup": "^2.26.10",
-    "rollup-plugin-css-only": "^2.1.0",
-    "rollup-plugin-esbuild": "^2.5.0",
+    "esbuild": "^0.8.16",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.33.3",
+    "rollup-plugin-css-only": "^3.0.0",
+    "rollup-plugin-esbuild": "^2.6.0",
     "rollup-plugin-filesize": "^9.0.2",
     "rollup-plugin-vue": "^5.1.9",
     "vue-template-compiler": "^2.6.12"
@@ -38,5 +36,12 @@
   "bugs": {
     "url": "https://github.com/dangvanthanh/vue-clock/issues"
   },
-  "homepage": "https://github.com/dangvanthanh/vue-clock#readme"
+  "homepage": "https://github.com/dangvanthanh/vue-clock#readme",
+  "prettier": {
+    "printWidth": 80,
+    "trailingComma": "es5",
+    "semi": false,
+    "singleQuote": true
+  },
+  "files": ["dist", "src", "package.json", "README.md"]
 }
