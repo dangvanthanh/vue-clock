@@ -192,5 +192,5 @@ if (GlobalVue) {
   GlobalVue.use(plugin);
 }
 
-export default plugin;
+export default __vue_component__;
 export { install };

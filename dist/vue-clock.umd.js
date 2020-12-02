@@ -261,7 +261,7 @@
     GlobalVue.use(plugin);
   }
 
-  exports.default = plugin;
+  exports.default = __vue_component__;
   exports.install = install;
 
   Object.defineProperty(exports, '__esModule', { value: true });

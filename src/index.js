@@ -23,4 +23,4 @@ if (GlobalVue) {
   GlobalVue.use(plugin);
 }
 
-export default plugin;
+export default VueClock;

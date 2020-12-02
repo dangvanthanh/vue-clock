@@ -1,6 +1,6 @@
 {
   "name": "@dangvanthanh/vue-clock",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Simple clock using Vue.js",
   "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
   "main": "dist/vue-clock.umd.js",
@@ -14,15 +14,19 @@
     "build:umd": "rollup -c build/rollup.config.umd.js",
     "release": "rimraf dist && npm run build && npx clean-publish"
   },
-  "keywords": ["vue", "vue-clock", "clock"],
+  "keywords": [
+    "vue",
+    "vue-clock",
+    "clock"
+  ],
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^16.0.0",
-    "@rollup/plugin-node-resolve": "^10.0.0",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
     "clean-css": "^4.2.3",
-    "esbuild": "^0.8.16",
+    "esbuild": "^0.8.17",
     "rimraf": "^3.0.2",
-    "rollup": "^2.33.3",
+    "rollup": "^2.34.0",
     "rollup-plugin-css-only": "^3.0.0",
     "rollup-plugin-esbuild": "^2.6.0",
     "rollup-plugin-filesize": "^9.0.2",
@@ -43,5 +47,10 @@
     "semi": false,
     "singleQuote": true
   },
-  "files": ["dist", "src", "package.json", "README.md"]
+  "files": [
+    "dist",
+    "src",
+    "package.json",
+    "README.md"
+  ]
 }
