@@ -1,6 +1,6 @@
 {
   "name": "@dangvanthanh/vue-clock",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "Simple clock using Vue.js",
   "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
   "main": "dist/vue-clock.umd.js",

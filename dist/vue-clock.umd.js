@@ -239,30 +239,28 @@
     );
 
   // Declare install function excuted by Vue.use()
-  function install(Vue) {
-    if (install.installed) {
-      return;
-    }
+  const install = function(Vue) {
+    if (install.installed) return
     install.installed = true;
     Vue.component('VueClock', __vue_component__);
-  }
+  };
 
+  // Create module definition for Vue.use
   const plugin = { install };
 
   let GlobalVue = null;
-
   if (typeof window !== 'undefined') {
     GlobalVue = window.Vue;
   } else if (typeof global !== 'undefined') {
     GlobalVue = global.Vue;
   }
-
   if (GlobalVue) {
     GlobalVue.use(plugin);
   }
 
+  __vue_component__.install = install;
+
   exports.default = __vue_component__;
-  exports.install = install;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
