@@ -1,17 +1,18 @@
 {
   "name": "@dangvanthanh/vue-clock",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Simple clock using Vue.js",
   "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
-  "main": "dist/vue-clock.umd.js",
-  "module": "dist/vue-clock.esm.js",
-  "unpkg": "dist/vue-clock.min.js",
-  "style": "vue-clock/dist/vue-clock.esm.css",
+  "main": "dist/index.ssr.js",
+  "browser": "dist/index.esm.js",
+  "module": "dist/index.esm.js",
+  "unpkg": "dist/index.min.js",
+  "style": "dist/index.css",
   "scripts": {
-    "build": "npm run build:browsers && npm run build:es && npm run build:umd",
-    "build:browsers": "rollup -c build/rollup.config.browsers.js",
+    "build": "rimraf dist && npm run build:unpkg && npm run build:es && npm run build:ssr",
+    "build:unpkg": "rollup -c build/rollup.config.unpkg.js",
     "build:es": "rollup -c build/rollup.config.es.js",
-    "build:umd": "rollup -c build/rollup.config.umd.js",
+    "build:ssr": "rollup -c build/rollup.config.cjs.js",
     "release": "rimraf dist && npm run build && npx clean-publish"
   },
   "keywords": [
@@ -21,16 +22,25 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@babel/preset-env": "7.12.10",
     "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-node-resolve": "^11.0.0",
-    "clean-css": "^4.2.3",
-    "esbuild": "^0.8.17",
+    "@rollup/plugin-node-resolve": "11.0.1",
+    "@rollup/plugin-replace": "^2.3.4",
+    "@testing-library/dom": "7.29.0",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/vue": "^5.6.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^26.6.3",
+    "esbuild": "0.8.23",
+    "jest": "^26.6.3",
+    "pascal-case": "^3.1.2",
     "rimraf": "^3.0.2",
-    "rollup": "^2.34.0",
-    "rollup-plugin-css-only": "^3.0.0",
-    "rollup-plugin-esbuild": "^2.6.0",
-    "rollup-plugin-filesize": "^9.0.2",
-    "rollup-plugin-vue": "^5.1.9",
+    "rollup": "2.35.1",
+    "rollup-plugin-esbuild": "2.6.1",
+    "rollup-plugin-filesize": "9.1.0",
+    "rollup-plugin-vue": "5.1.9",
+    "vue": "^2.6.12",
+    "vue-jest": "^3.0.7",
     "vue-template-compiler": "^2.6.12"
   },
   "repository": {
@@ -51,6 +61,7 @@
     "dist",
     "src",
     "package.json",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ]
 }

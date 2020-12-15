@@ -34,7 +34,7 @@ Vue.use(VueClock);
 ```vue
 <template>
   <div class="app">
-    <vue-clock />
+    <VueClock />
   </div>
 </template>
 
@@ -52,7 +52,6 @@ export default {
 ```javascript
 import Vue from 'vue';
 import VueClock from '@dangvanthanh/vue-clock';
-import 'vue-clock/dist/vue-clock.esm.css';
 
 Vue.component('VueClock', VueClock);
 // or

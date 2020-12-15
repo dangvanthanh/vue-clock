@@ -1,4 +1,4 @@
-const SECOND = 1000;
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});const SECOND = 1000;
 const HOUR = 12;
 
 function getHourTime (h) {
@@ -7,9 +7,7 @@ function getHourTime (h) {
 
 function getZeroPad (n) {
   return (parseInt(n, 10) >= 10 ? '' : '0') + n
-}
-
-//
+}//
 
 var script = {
   data() {
@@ -37,9 +35,7 @@ var script = {
       this.$options.timer = window.setTimeout(this.updateDateTime, SECOND);
     },
   },
-};
-
-function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+};function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
     if (typeof shadowMode !== 'boolean') {
         createInjectorSSR = createInjector;
         createInjector = shadowMode;
@@ -112,10 +108,49 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
         }
     }
     return script;
+}function createInjectorSSR(context) {
+    if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__;
+    }
+    if (!context)
+        return () => { };
+    if (!('styles' in context)) {
+        context._styles = context._styles || {};
+        Object.defineProperty(context, 'styles', {
+            enumerable: true,
+            get: () => context._renderStyles(context._styles)
+        });
+        context._renderStyles = context._renderStyles || renderStyles;
+    }
+    return (id, style) => addStyle(id, style, context);
 }
-
-/* script */
+function addStyle(id, css, context) {
+    const group =  css.media || 'default' ;
+    const style = context._styles[group] || (context._styles[group] = { ids: [], css: '' });
+    if (!style.ids.includes(id)) {
+        style.media = css.media;
+        style.ids.push(id);
+        let code = css.source;
+        style.css += code + '\n';
+    }
+}
+function renderStyles(styles) {
+    let css = '';
+    for (const key in styles) {
+        const style = styles[key];
+        css +=
+            '<style data-vue-ssr-id="' +
+                Array.from(style.ids).join(' ') +
+                '"' +
+                (style.media ? ' media="' + style.media + '"' : '') +
+                '>' +
+                style.css +
+                '</style>';
+    }
+    return css;
+}/* script */
 const __vue_script__ = script;
+
 /* template */
 var __vue_render__ = function() {
   var _vm = this;
@@ -141,17 +176,17 @@ var __vue_staticRenderFns__ = [];
 __vue_render__._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__ = undefined;
+  const __vue_inject_styles__ = function (inject) {
+    if (!inject) return
+    inject("data-v-91068ba8_0", { source: "\n.clock[data-v-91068ba8] {\n  background: #fff;\n  border: 0.3rem solid #fff;\n  border-radius: 0.5rem;\n  display: inline-block;\n  margin-bottom: 1em;\n}\n.clock__hours[data-v-91068ba8],\n.clock__minutes[data-v-91068ba8],\n.clock__seconds[data-v-91068ba8] {\n  background: linear-gradient(to bottom, #26303b 50%, #2c3540 50%);\n  display: inline-block;\n  color: #fff;\n  font-family: 'Nunito', sans-serif;\n  font-size: 3rem;\n  font-weight: 300;\n  padding: 0.5rem 1rem;\n  text-align: center;\n  position: relative;\n}\n.clock__hours[data-v-91068ba8] {\n  border-right: 0.15rem solid #fff;\n  border-radius: 0.5rem 0 0 0.5rem;\n}\n.clock__minutes[data-v-91068ba8] {\n  border-right: 0.15rem solid #fff;\n}\n.clock__seconds[data-v-91068ba8] {\n  border-radius: 0 0.5rem 0.5rem 0;\n}\n.clock__hourtime[data-v-91068ba8] {\n  font-size: 1rem;\n  position: absolute;\n  top: 2px;\n  left: 8px;\n}\n", map: {"version":3,"sources":["/Users/dangvanthanh/Code/Github/vue-clock/src/VueClock.vue"],"names":[],"mappings":";AA4CA;EACA,gBAAA;EACA,yBAAA;EACA,qBAAA;EACA,qBAAA;EACA,kBAAA;AACA;AAEA;;;EAGA,gEAAA;EACA,qBAAA;EACA,WAAA;EACA,iCAAA;EACA,eAAA;EACA,gBAAA;EACA,oBAAA;EACA,kBAAA;EACA,kBAAA;AACA;AAEA;EACA,gCAAA;EACA,gCAAA;AACA;AAEA;EACA,gCAAA;AACA;AAEA;EACA,gCAAA;AACA;AAEA;EACA,eAAA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;AACA","file":"VueClock.vue","sourcesContent":["<template>\n  <div class=\"clock\" v-if=\"hourtime != ''\">\n    <div class=\"clock__hours\">\n      <span class=\"clock__hourtime\" v-text=\"hourtime\"></span>\n      <span v-text=\"hours\"></span>\n    </div>\n    <div class=\"clock__minutes\" v-text=\"minutes\"></div>\n    <div class=\"clock__seconds\" v-text=\"seconds\"></div>\n  </div>\n</template>\n\n<script>\nimport { SECOND, HOUR, getHourTime, getZeroPad } from './Filters';\n\nexport default {\n  data() {\n    return {\n      hours: 0,\n      minutes: 0,\n      seconds: 0,\n      hourtime: '',\n    };\n  },\n  mounted() {\n    this.$options.timer = window.setTimeout(this.updateDateTime, SECOND);\n  },\n  beforeDestroy() {\n    window.clearTimeout(this.$options.timer);\n  },\n  methods: {\n    updateDateTime() {\n      const now = new Date();\n      this.hours = now.getHours();\n      this.minutes = getZeroPad(now.getMinutes());\n      this.seconds = getZeroPad(now.getSeconds());\n      this.hourtime = getHourTime(this.hours);\n      this.hours = this.hours % HOUR || HOUR;\n      this.$options.timer = window.setTimeout(this.updateDateTime, SECOND);\n    },\n  },\n};\n</script>\n\n<style scoped>\n.clock {\n  background: #fff;\n  border: 0.3rem solid #fff;\n  border-radius: 0.5rem;\n  display: inline-block;\n  margin-bottom: 1em;\n}\n\n.clock__hours,\n.clock__minutes,\n.clock__seconds {\n  background: linear-gradient(to bottom, #26303b 50%, #2c3540 50%);\n  display: inline-block;\n  color: #fff;\n  font-family: 'Nunito', sans-serif;\n  font-size: 3rem;\n  font-weight: 300;\n  padding: 0.5rem 1rem;\n  text-align: center;\n  position: relative;\n}\n\n.clock__hours {\n  border-right: 0.15rem solid #fff;\n  border-radius: 0.5rem 0 0 0.5rem;\n}\n\n.clock__minutes {\n  border-right: 0.15rem solid #fff;\n}\n\n.clock__seconds {\n  border-radius: 0 0.5rem 0.5rem 0;\n}\n\n.clock__hourtime {\n  font-size: 1rem;\n  position: absolute;\n  top: 2px;\n  left: 8px;\n}\n</style>\n"]}, media: undefined });
+
+  };
   /* scoped */
   const __vue_scope_id__ = "data-v-91068ba8";
   /* module identifier */
   const __vue_module_identifier__ = "data-v-91068ba8";
   /* functional template */
   const __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
   /* style inject shadow dom */
   
 
@@ -165,11 +200,9 @@ __vue_render__._withStripped = true;
     __vue_module_identifier__,
     false,
     undefined,
-    undefined,
+    createInjectorSSR,
     undefined
-  );
-
-// Declare install function excuted by Vue.use()
+  );// Declare install function excuted by Vue.use()
 const install = function(Vue) {
   if (install.installed) return
   install.installed = true;
@@ -189,6 +222,4 @@ if (GlobalVue) {
   GlobalVue.use(plugin);
 }
 
-__vue_component__.install = install;
-
-export default __vue_component__;
+__vue_component__.install = install;exports.default=__vue_component__;
