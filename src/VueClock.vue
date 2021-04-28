@@ -22,10 +22,8 @@ export default {
     };
   },
   mounted() {
-    this.$options.timer = window.setTimeout(this.updateDateTime, SECOND);
-  },
-  beforeDestroy() {
-    window.clearTimeout(this.$options.timer);
+    const timer = window.setTimeout(this.updateDateTime, SECOND);
+    this.$on('hook:destroyed', () => window.clearTimeout(timer))
   },
   methods: {
     updateDateTime() {
