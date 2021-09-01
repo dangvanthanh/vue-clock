@@ -220,4 +220,4 @@ if (GlobalVue) {
   GlobalVue.use(plugin);
 }
 
-__vue_component__.install = install;exports.default=__vue_component__;
+__vue_component__.install = install;exports['default']=__vue_component__;

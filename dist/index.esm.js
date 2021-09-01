@@ -252,4 +252,4 @@ if (GlobalVue) {
 
 __vue_component__.install = install;
 
-export default __vue_component__;
+export { __vue_component__ as default };
