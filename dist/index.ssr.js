@@ -10,6 +10,20 @@ function getZeroPad (n) {
 }//
 
 var script = {
+  props: {
+    isHour: {
+      type: Boolean,
+      default: true
+    },
+    isMinute: {
+      type: Boolean,
+      default: true
+    },
+    isSecond: {
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
       hours: 0,
@@ -157,15 +171,25 @@ var __vue_render__ = function() {
   return _vm.hourtime != ""
     ? _c("div", { staticClass: "clock" }, [
         _vm._ssrNode(
-          '<div class="clock__hours" data-v-f278a444><span class="clock__hourtime" data-v-f278a444>' +
-            _vm._ssrEscape(_vm._s(_vm.hourtime)) +
-            "</span> <span data-v-f278a444>" +
-            _vm._ssrEscape(_vm._s(_vm.hours)) +
-            '</span></div> <div class="clock__minutes" data-v-f278a444>' +
-            _vm._ssrEscape(_vm._s(_vm.minutes)) +
-            '</div> <div class="clock__seconds" data-v-f278a444>' +
-            _vm._ssrEscape(_vm._s(_vm.seconds)) +
-            "</div>"
+          (_vm.isHour
+            ? '<div class="clock__hours" data-v-f23539f2><span class="clock__hourtime" data-v-f23539f2>' +
+              _vm._ssrEscape(_vm._s(_vm.hourtime)) +
+              "</span> <span data-v-f23539f2>" +
+              _vm._ssrEscape(_vm._s(_vm.hours)) +
+              "</span></div>"
+            : "<!---->") +
+            " " +
+            (_vm.isMinute
+              ? '<div class="clock__minutes" data-v-f23539f2>' +
+                _vm._ssrEscape(_vm._s(_vm.minutes)) +
+                "</div>"
+              : "<!---->") +
+            " " +
+            (_vm.isSecond
+              ? '<div class="clock__seconds" data-v-f23539f2>' +
+                _vm._ssrEscape(_vm._s(_vm.seconds)) +
+                "</div>"
+              : "<!---->")
         )
       ])
     : _vm._e()
@@ -176,13 +200,13 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-f278a444_0", { source: "\n.clock[data-v-f278a444] {\n  background: #fff;\n  border: 0.3rem solid #fff;\n  border-radius: 0.5rem;\n  display: inline-block;\n  margin-bottom: 1em;\n}\n.clock__hours[data-v-f278a444],\n.clock__minutes[data-v-f278a444],\n.clock__seconds[data-v-f278a444] {\n  background: linear-gradient(to bottom, #26303b 50%, #2c3540 50%);\n  display: inline-block;\n  color: #fff;\n  font-family: 'Nunito', sans-serif;\n  font-size: 3rem;\n  font-weight: 300;\n  padding: 0.5rem 1rem;\n  text-align: center;\n  position: relative;\n}\n.clock__hours[data-v-f278a444] {\n  border-right: 0.15rem solid #fff;\n  border-radius: 0.5rem 0 0 0.5rem;\n}\n.clock__minutes[data-v-f278a444] {\n  border-right: 0.15rem solid #fff;\n}\n.clock__seconds[data-v-f278a444] {\n  border-radius: 0 0.5rem 0.5rem 0;\n}\n.clock__hourtime[data-v-f278a444] {\n  font-size: 1rem;\n  position: absolute;\n  top: 2px;\n  left: 8px;\n}\n", map: {"version":3,"sources":["/Users/dangvanthanh/Code/Github/vue-clock/src/VueClock.vue"],"names":[],"mappings":";AA0CA;EACA,gBAAA;EACA,yBAAA;EACA,qBAAA;EACA,qBAAA;EACA,kBAAA;AACA;AAEA;;;EAGA,gEAAA;EACA,qBAAA;EACA,WAAA;EACA,iCAAA;EACA,eAAA;EACA,gBAAA;EACA,oBAAA;EACA,kBAAA;EACA,kBAAA;AACA;AAEA;EACA,gCAAA;EACA,gCAAA;AACA;AAEA;EACA,gCAAA;AACA;AAEA;EACA,gCAAA;AACA;AAEA;EACA,eAAA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;AACA","file":"VueClock.vue","sourcesContent":["<template>\n  <div class=\"clock\" v-if=\"hourtime != ''\">\n    <div class=\"clock__hours\">\n      <span class=\"clock__hourtime\" v-text=\"hourtime\"></span>\n      <span v-text=\"hours\"></span>\n    </div>\n    <div class=\"clock__minutes\" v-text=\"minutes\"></div>\n    <div class=\"clock__seconds\" v-text=\"seconds\"></div>\n  </div>\n</template>\n\n<script>\nimport { SECOND, HOUR, getHourTime, getZeroPad } from './Filters';\n\nexport default {\n  data() {\n    return {\n      hours: 0,\n      minutes: 0,\n      seconds: 0,\n      hourtime: '',\n    };\n  },\n  mounted() {\n    const timer = window.setTimeout(this.updateDateTime, SECOND);\n    this.$on('hook:destroyed', () => window.clearTimeout(timer))\n  },\n  methods: {\n    updateDateTime() {\n      const now = new Date();\n      this.hours = now.getHours();\n      this.minutes = getZeroPad(now.getMinutes());\n      this.seconds = getZeroPad(now.getSeconds());\n      this.hourtime = getHourTime(this.hours);\n      this.hours = this.hours % HOUR || HOUR;\n      this.$options.timer = window.setTimeout(this.updateDateTime, SECOND);\n    },\n  },\n};\n</script>\n\n<style scoped>\n.clock {\n  background: #fff;\n  border: 0.3rem solid #fff;\n  border-radius: 0.5rem;\n  display: inline-block;\n  margin-bottom: 1em;\n}\n\n.clock__hours,\n.clock__minutes,\n.clock__seconds {\n  background: linear-gradient(to bottom, #26303b 50%, #2c3540 50%);\n  display: inline-block;\n  color: #fff;\n  font-family: 'Nunito', sans-serif;\n  font-size: 3rem;\n  font-weight: 300;\n  padding: 0.5rem 1rem;\n  text-align: center;\n  position: relative;\n}\n\n.clock__hours {\n  border-right: 0.15rem solid #fff;\n  border-radius: 0.5rem 0 0 0.5rem;\n}\n\n.clock__minutes {\n  border-right: 0.15rem solid #fff;\n}\n\n.clock__seconds {\n  border-radius: 0 0.5rem 0.5rem 0;\n}\n\n.clock__hourtime {\n  font-size: 1rem;\n  position: absolute;\n  top: 2px;\n  left: 8px;\n}\n</style>\n"]}, media: undefined });
+    inject("data-v-f23539f2_0", { source: "\n.clock[data-v-f23539f2] {\n  background: #fff;\n  border: 0.3rem solid #fff;\n  border-radius: 0.5rem;\n  display: inline-block;\n  margin-bottom: 1em;\n}\n.clock__hours[data-v-f23539f2],\n.clock__minutes[data-v-f23539f2],\n.clock__seconds[data-v-f23539f2] {\n  background: linear-gradient(to bottom, #26303b 50%, #2c3540 50%);\n  display: inline-block;\n  color: #fff;\n  font-family: 'Nunito', sans-serif;\n  font-size: 3rem;\n  font-weight: 300;\n  padding: 0.5rem 1rem;\n  text-align: center;\n  position: relative;\n}\n.clock__hours[data-v-f23539f2] {\n  border-right: 0.15rem solid #fff;\n}\n.clock__minutes[data-v-f23539f2] {\n  border-right: 0.15rem solid #fff;\n}\n.clock__hourtime[data-v-f23539f2] {\n  font-size: 1rem;\n  position: absolute;\n  top: 2px;\n  left: 8px;\n}\n", map: {"version":3,"sources":["/Users/dangvanthanh/Code/Github/vue-clock/src/VueClock.vue"],"names":[],"mappings":";AAwDA;EACA,gBAAA;EACA,yBAAA;EACA,qBAAA;EACA,qBAAA;EACA,kBAAA;AACA;AAEA;;;EAGA,gEAAA;EACA,qBAAA;EACA,WAAA;EACA,iCAAA;EACA,eAAA;EACA,gBAAA;EACA,oBAAA;EACA,kBAAA;EACA,kBAAA;AACA;AAEA;EACA,gCAAA;AACA;AAEA;EACA,gCAAA;AACA;AAEA;EACA,eAAA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;AACA","file":"VueClock.vue","sourcesContent":["<template>\n  <div class=\"clock\" v-if=\"hourtime != ''\">\n    <div class=\"clock__hours\" v-if=\"isHour\">\n      <span class=\"clock__hourtime\" v-text=\"hourtime\"></span>\n      <span v-text=\"hours\"></span>\n    </div>\n    <div class=\"clock__minutes\" v-text=\"minutes\" v-if=\"isMinute\"></div>\n    <div class=\"clock__seconds\" v-text=\"seconds\" v-if=\"isSecond\"></div>\n  </div>\n</template>\n\n<script>\nimport { SECOND, HOUR, getHourTime, getZeroPad } from './filters';\n\nexport default {\n  props: {\n    isHour: {\n      type: Boolean,\n      default: true\n    },\n    isMinute: {\n      type: Boolean,\n      default: true\n    },\n    isSecond: {\n      type: Boolean,\n      default: true\n    }\n  },\n  data() {\n    return {\n      hours: 0,\n      minutes: 0,\n      seconds: 0,\n      hourtime: '',\n    };\n  },\n  mounted() {\n    const timer = window.setTimeout(this.updateDateTime, SECOND);\n    this.$on('hook:destroyed', () => window.clearTimeout(timer))\n  },\n  methods: {\n    updateDateTime() {\n      const now = new Date();\n      this.hours = now.getHours();\n      this.minutes = getZeroPad(now.getMinutes());\n      this.seconds = getZeroPad(now.getSeconds());\n      this.hourtime = getHourTime(this.hours);\n      this.hours = this.hours % HOUR || HOUR;\n      this.$options.timer = window.setTimeout(this.updateDateTime, SECOND);\n    },\n  },\n};\n</script>\n\n<style scoped>\n.clock {\n  background: #fff;\n  border: 0.3rem solid #fff;\n  border-radius: 0.5rem;\n  display: inline-block;\n  margin-bottom: 1em;\n}\n\n.clock__hours,\n.clock__minutes,\n.clock__seconds {\n  background: linear-gradient(to bottom, #26303b 50%, #2c3540 50%);\n  display: inline-block;\n  color: #fff;\n  font-family: 'Nunito', sans-serif;\n  font-size: 3rem;\n  font-weight: 300;\n  padding: 0.5rem 1rem;\n  text-align: center;\n  position: relative;\n}\n\n.clock__hours {\n  border-right: 0.15rem solid #fff;\n}\n\n.clock__minutes {\n  border-right: 0.15rem solid #fff;\n}\n\n.clock__hourtime {\n  font-size: 1rem;\n  position: absolute;\n  top: 2px;\n  left: 8px;\n}\n</style>\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__ = "data-v-f278a444";
+  const __vue_scope_id__ = "data-v-f23539f2";
   /* module identifier */
-  const __vue_module_identifier__ = "data-v-f278a444";
+  const __vue_module_identifier__ = "data-v-f23539f2";
   /* functional template */
   const __vue_is_functional_template__ = false;
   /* style inject shadow dom */

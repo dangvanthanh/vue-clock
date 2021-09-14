@@ -1,18 +1,32 @@
 <template>
   <div class="clock" v-if="hourtime != ''">
-    <div class="clock__hours">
+    <div class="clock__hours" v-if="isHour">
       <span class="clock__hourtime" v-text="hourtime"></span>
       <span v-text="hours"></span>
     </div>
-    <div class="clock__minutes" v-text="minutes"></div>
-    <div class="clock__seconds" v-text="seconds"></div>
+    <div class="clock__minutes" v-text="minutes" v-if="isMinute"></div>
+    <div class="clock__seconds" v-text="seconds" v-if="isSecond"></div>
   </div>
 </template>
 
 <script>
-import { SECOND, HOUR, getHourTime, getZeroPad } from './Filters';
+import { SECOND, HOUR, getHourTime, getZeroPad } from './filters';
 
 export default {
+  props: {
+    isHour: {
+      type: Boolean,
+      default: true
+    },
+    isMinute: {
+      type: Boolean,
+      default: true
+    },
+    isSecond: {
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
       hours: 0,
@@ -64,15 +78,10 @@ export default {
 
 .clock__hours {
   border-right: 0.15rem solid #fff;
-  border-radius: 0.5rem 0 0 0.5rem;
 }
 
 .clock__minutes {
   border-right: 0.15rem solid #fff;
-}
-
-.clock__seconds {
-  border-radius: 0 0.5rem 0.5rem 0;
 }
 
 .clock__hourtime {
