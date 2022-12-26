@@ -1,6 +1,6 @@
 {
   "name": "@dangvanthanh/vue-clock",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Simple clock using Vue.js",
   "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
   "main": "dist/index.ssr.js",
@@ -32,7 +32,6 @@
     "rollup": "2.79.0",
     "rollup-plugin-esbuild": "5.0.0",
     "rollup-plugin-filesize": "9.1.2",
-    "rollup-plugin-terser": "6.0.0",
     "rollup-plugin-vue": "5.1.9",
     "vue": "^2.7.14",
     "vue-template-compiler": "^2.7.14"
