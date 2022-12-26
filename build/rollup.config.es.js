@@ -2,7 +2,9 @@ import replace from '@rollup/plugin-replace'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import vue from 'rollup-plugin-vue'
+import { terser } from 'rollup-plugin-terser'
 import filesize from 'rollup-plugin-filesize'
+
 import pkg from '../package.json'
 
 const config = {
@@ -22,6 +24,7 @@ const config = {
     nodeResolve(),
     commonjs(),
     vue({ css: true }),
+    terser(),
     filesize(),
   ],
 }
