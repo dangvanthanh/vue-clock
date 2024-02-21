@@ -1,56 +1,46 @@
 {
-  "name": "@dangvanthanh/vue-clock",
-  "version": "0.2.5",
-  "description": "Simple clock using Vue.js",
-  "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
-  "main": "dist/index.ssr.js",
-  "browser": "dist/index.esm.js",
-  "module": "dist/index.esm.js",
-  "unpkg": "dist/index.min.js",
-  "style": "dist/index.css",
-  "scripts": {
-    "build": "rimraf dist && npm run build:unpkg && npm run build:es && npm run build:ssr",
-    "build:unpkg": "rollup -c build/rollup.config.unpkg.js",
-    "build:es": "rollup -c build/rollup.config.es.js",
-    "build:ssr": "rollup -c build/rollup.config.cjs.js",
-    "release": "rimraf dist && npm run build && npx clean-publish"
-  },
-  "keywords": [
-    "vue",
-    "vue-clock",
-    "clock"
-  ],
-  "license": "MIT",
-  "devDependencies": {
-    "@dangvanthanh/prettier-config": "^1.0.0",
-    "@rollup/plugin-commonjs": "23.0.5",
-    "@rollup/plugin-node-resolve": "15.0.1",
-    "@rollup/plugin-replace": "5.0.1",
-    "@rollup/plugin-terser": "^0.2.1",
-    "esbuild": "0.16.7",
-    "pascal-case": "^3.1.2",
-    "rimraf": "^3.0.2",
-    "rollup": "2.79.0",
-    "rollup-plugin-esbuild": "5.0.0",
-    "rollup-plugin-filesize": "9.1.2",
-    "rollup-plugin-vue": "5.1.9",
-    "vue": "^2.7.14",
-    "vue-template-compiler": "^2.7.14"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dangvanthanh/vue-clock.git"
-  },
-  "bugs": {
-    "url": "https://github.com/dangvanthanh/vue-clock/issues"
-  },
-  "homepage": "https://github.com/dangvanthanh/vue-clock#readme",
-  "prettier": "@dangvanthanh/prettier-config",
-  "files": [
-    "dist",
-    "src",
-    "package.json",
-    "README.md",
-    "LICENSE"
-  ]
+	"name": "@dangvanthanh/vue-clock",
+	"version": "0.2.5",
+	"description": "Simple clock using Vue.js",
+	"author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
+	"main": "dist/index.ssr.js",
+	"browser": "dist/index.esm.js",
+	"module": "dist/index.esm.js",
+	"unpkg": "dist/index.min.js",
+	"style": "dist/index.css",
+	"scripts": {
+		"build": "rimraf dist && npm run build:unpkg && npm run build:es && npm run build:ssr",
+		"build:unpkg": "rollup -c build/rollup.config.unpkg.js",
+		"build:es": "rollup -c build/rollup.config.es.js",
+		"build:ssr": "rollup -c build/rollup.config.cjs.js",
+		"release": "rimraf dist && npm run build && npx clean-publish"
+	},
+	"keywords": ["vue", "vue-clock", "clock"],
+	"license": "MIT",
+	"devDependencies": {
+		"@dangvanthanh/prettier-config": "^1.0.0",
+		"@rollup/plugin-commonjs": "23.0.5",
+		"@rollup/plugin-node-resolve": "15.2.3",
+		"@rollup/plugin-replace": "5.0.5",
+		"@rollup/plugin-terser": "^0.2.1",
+		"esbuild": "0.16.7",
+		"pascal-case": "^3.1.2",
+		"rimraf": "^5.0.5",
+		"rollup": "2.79.0",
+		"rollup-plugin-esbuild": "5.0.0",
+		"rollup-plugin-filesize": "9.1.2",
+		"rollup-plugin-vue": "5.1.9",
+		"vue": "^2.7.16",
+		"vue-template-compiler": "^2.7.16"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dangvanthanh/vue-clock.git"
+	},
+	"bugs": {
+		"url": "https://github.com/dangvanthanh/vue-clock/issues"
+	},
+	"homepage": "https://github.com/dangvanthanh/vue-clock#readme",
+	"prettier": "@dangvanthanh/prettier-config",
+	"files": ["dist", "src", "package.json", "README.md", "LICENSE"]
 }
