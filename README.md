@@ -65,13 +65,13 @@ Vue.component("VueClock", VueClock);
 
 # Props
 
-| Name       | Type      | Default | Description                                             |
-| ---------- | --------- | ------- | ------------------------------------------------------- |
-| `is24h`    | `Boolean` | `false` | Display 24h or not                                      |
-| `isHour`   | `Boolean` | `true`  | Display/hidden hour                                     |
-| `isMinute` | `Boolean` | `true`  | Display/hidden minute                                   |
-| `isSecond` | `Boolean` | `true`  | Display/hidden second                                   |
-| `timeZone` | `String`  | `true`  | [List of Time Zones](https://timezonedb.com/time-zones) |
+| Name       | Type      | Default                                     | Description                                             |
+| ---------- | --------- | ------------------------------------------- | ------------------------------------------------------- |
+| `is24h`    | `Boolean` | `false`                                     | Display 24h or not                                      |
+| `isHour`   | `Boolean` | `true`                                      | Display/hidden hour                                     |
+| `isMinute` | `Boolean` | `true`                                      | Display/hidden minute                                   |
+| `isSecond` | `Boolean` | `true`                                      | Display/hidden second                                   |
+| `timeZone` | `String`  | `Your current timeZone such as Asia/Saigon` | [List of Time Zones](https://timezonedb.com/time-zones) |
 
 ## License
 
