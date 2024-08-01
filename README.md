@@ -23,10 +23,10 @@ $ npm install @dangvanthanh/vue-clock --save
 ### Vue
 
 ```javascript
-import Vue from 'vue'
-import VueClock from '@dangvanthanh/vue-clock'
+import Vue from "vue";
+import VueClock from "@dangvanthanh/vue-clock";
 
-Vue.use(VueClock)
+Vue.use(VueClock);
 ```
 
 ```vue
@@ -37,7 +37,9 @@ Vue.use(VueClock)
     <h3>Hidden hour</h3>
     <VueClock :isHour="false"/>
     <h3>Hidden minute and second</h3>
-    <VueClock :isMinute="false" :isSecond="false"/>
+    <VueClock :isMinute="false" :isSecond="false" />
+    <h3>With timeZone</h3>
+    <VueClock timeZone="'America/New_York'" />
   </div>
 </template>
 
@@ -53,21 +55,23 @@ export default {
 ### Nuxt (or SSR)
 
 ```javascript
-import Vue from 'vue'
-import VueClock from '@dangvanthanh/vue-clock'
+import Vue from "vue";
+import VueClock from "@dangvanthanh/vue-clock";
 
-Vue.component('VueClock', VueClock)
+Vue.component("VueClock", VueClock);
 // or
 // Vue.use(VueClock);
 ```
 
 # Props
 
-| Name       | Type      | Default | Description           |
-| ---------- | --------- | ------- | --------------------- |
-| `isHour`   | `Boolean` | `true`  | Display/hidden hour   |
-| `isMinute` | `Boolean` | `true`  | Display/hidden minute |
-| `isSecond` | `Boolean` | `true`  | Display/hidden second |
+| Name       | Type      | Default | Description                                             |
+| ---------- | --------- | ------- | ------------------------------------------------------- |
+| `is24h`    | `Boolean` | `false` | Display 24h or not                                      |
+| `isHour`   | `Boolean` | `true`  | Display/hidden hour                                     |
+| `isMinute` | `Boolean` | `true`  | Display/hidden minute                                   |
+| `isSecond` | `Boolean` | `true`  | Display/hidden second                                   |
+| `timeZone` | `String`  | `true`  | [List of Time Zones](https://timezonedb.com/time-zones) |
 
 ## License
 

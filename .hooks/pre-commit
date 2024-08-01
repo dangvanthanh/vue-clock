@@ -1,0 +1,5 @@
+#!/bin/sh
+echo "pre-commit hook run"
+
+bun run lint
+bun run format
