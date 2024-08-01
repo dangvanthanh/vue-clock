@@ -71,7 +71,7 @@ Vue.component("VueClock", VueClock);
 | `isHour`   | `Boolean` | `true`                                      | Display/hidden hour                                     |
 | `isMinute` | `Boolean` | `true`                                      | Display/hidden minute                                   |
 | `isSecond` | `Boolean` | `true`                                      | Display/hidden second                                   |
-| `timeZone` | `String`  | `Your current timeZone such as Asia/Saigon` | [List of Time Zones](https://timezonedb.com/time-zones) |
+| `timeZone` | `String`  | Your current timeZone such as `Asia/Saigon` | [List of Time Zones](https://timezonedb.com/time-zones) |
 
 ## License
 
